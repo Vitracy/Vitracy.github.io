@@ -1164,8 +1164,8 @@ document.getElementById("reset").addEventListener("click", () => {
 // Function to send to appropriate webhook based on detention location
 function sendToDiscordWebhook(laporan, lokasiPenahanan) {
     const webhookURLs = {
-        "Federal": "https://discord.com/api/webhooks/1335227184180363356/3G1SCPsqO8WKbRX1oYKCTuCw20FH3UtDY4oEkQKNp-7ZZYfNtdVFcP09mcEmMo4xnERf",
-        "Kantor Pusat": "https://discord.com/api/webhooks/1335228644276174858/u1Fmr29mLJbG0OQ1o6vqTiF9XkPxqxwzAVfwgiSrXD9BE2umlEwwKGf8gwOR9RiAAxJe"
+        "Federal": "https://discord.com/api/webhooks/1355242073527156816/43h4kneI9iuOQkwHVgHuJuN7pUyddeRtNv-5GaWtBJs6DvQ2a1igDJTgpK3jiKNSveue",
+        "Kantor Pusat": "https://discord.com/api/webhooks/1355242400708169778/16R3qZoSHiJXQayLgwlsqA9p_x0XTr85LwtI7LwCEMVDeQEiw5E67r9jeIudPU04RO00"
     };
 
     fetch(webhookURLs[lokasiPenahanan], {
