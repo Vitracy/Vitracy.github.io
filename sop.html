@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <title>Undang-Undang</title>
+    <style>
+        body {
+            background-image: url('home.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px auto;
+            max-width: 1200px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .container button {
+            background-color: #3600ca;
+            color: #fff;
+            font-size: 12px;
+            padding: 10px 45px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .radio {
+            background-color: #00ff3c;
+            color: #00f83a;
+        }
+        #summary-container {
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        #summary-table th, #summary-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        #summary-table th {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .copy-button {
+            margin-top: 5px;
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .search-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px; /* Bisa disesuaikan */
+            margin: 0 auto;
+        }
+
+        #searchInput {
+            width: 96%;
+            padding: 12px 10px; /* Ruang lebih untuk ikon */
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #searchInput:focus {
+            border-color: #007bff;
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+        }
+
+        .search-container i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+            font-size: 18px;
+        }
+        .checkbox {
+            transform: scale(2.0); /* Skala 1.5 untuk memperbesar ukuran */
+            -webkit-transform: scale(2.0); /* Safari */
+            -moz-transform: scale(2.0); /* Firefox */
+            cursor: pointer; /* Menambahkan cursor pointer agar mudah di klik */
+        }
+
+        #radioTable td {
+            text-align: left;
+            padding: 8px; /* Biar lebih rapi */
+        }
+
+/*mulai navbar*/
+
+        .navbar {
+            background: #1f2937;
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 1.5rem;
+            margin: 0 auto;
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+            color: white;
+        }
+
+        .nav-link {
+            padding: 0.5rem 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+            color: white;
+        }
+
+        .nav-link a {
+            text-decoration: none;
+            color: currentColor;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: white;
+        }
+
+        .drop-down {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
+            background: antiquewhite;
+            color: black;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 0.5rem;
+            font-size: 12px;
+            display: none;
+            min-width: 150px;
+            color: white;
+        }
+
+        .drop-down li {
+            list-style: none;
+        }
+
+        .drop-down a {
+            display: block;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            color: black;
+            font-weight: 600;
+        }
+
+        .nav-link:hover {
+            background-color: black;
+            color: #fff;
+            border-radius: 0.5rem;
+        }
+
+        .services:hover .drop-down, .profile-menu {
+            display: block;
+        }
+
+        .services .dropdown-icon {
+            font-size: 18px;
+            transform: rotate(0deg);
+            transition: 0.3s ease-in-out all;
+        }
+
+        .services:hover .dropdown-icon {
+            transform: rotate(180deg);
+        }
+
+        .drop-down li:hover {
+            background: black;
+        }
+
+        .drop-down li:hover a {
+            color: #fff;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+
+        .logo span {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .user-info span {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .user-info img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+
+        /* Profil Menu */
+        .profile-menu {
+            position: absolute;
+            top: 35px; /* Menurunkan menu agar tepat di bawah foto */
+            left: 0;
+            background-color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 0.5rem;
+            display: none;
+            min-width: 150px;
+            padding: 0;
+            z-index: 10;
+        }
+
+        .profile-menu a {
+            padding: 0.5rem 1rem;
+            display: block;
+            text-decoration: none;
+            color: black;
+            font-weight: 600;
+        }
+
+        .profile-menu a:hover {
+            background: #f1f1f1;
+            color: black;
+        }
+
+        /* Menu "UUD" Dropdown */
+        .services .drop-down {
+            position: absolute;
+            top: 100%; /* Agar berada di bawah UUD */
+            left: 0;
+            background-color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 0.5rem;
+            display: none;
+            padding: 0;
+            min-width: 150px;
+        }
+
+        .services .drop-down a {
+            padding: 0.5rem 1rem;
+            display: block;
+            text-decoration: none;
+            color: black;
+            font-weight: 600;
+        }
+
+        .services .drop-down a:hover {
+            background: #1f2937;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            position: relative;
+            transform: scale(0.7);
+            animation: popUp 0.4s ease-in-out forwards;
+        }
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #1f2937;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .profile-name {
+            font-size: 26px;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #1f2937;
+        }
+        .profile-info {
+            font-size: 22px;
+            font-weight: bold;
+            color: #555;
+            margin: 5px 0;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes popUp {
+            from { transform: scale(0.7); }
+            to { transform: scale(1); }
+        }
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li class="logo">
+                <img src="logo polisi.png" alt="Logo Polisi">
+                <span>Polisi Kuyland</span>
+            </li>
+            <li class="nav-link">
+                <a href="sop.html">SOP</a>
+            </li>
+            <li class="nav-link services">
+                <a href="#">UUD</a>
+                <ul class="drop-down">
+                    <li><a href="undang.html">UUD Kuyland</a></li>
+                    <li><a href="berkendara.html">UUD Berkendara</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div class="user-info" id="user-info">
+            <span id="user-name">Silahkan Login terlebih dahulu!!</span>
+            <img src="profile.png" alt="User" id="user-img">
+            <div class="profile-menu" id="profile-menu">
+                <a href="#" id="openProfile">Profil</a>
+                <a href="index.html">Logout</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Modal Profil -->
+    <div id="profileModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeProfile">&times;</span>
+            <div class="profile-container">
+                <img src="profile.png" alt="Profile Picture" class="profile-img">
+                <h2 class="profile-name" id="petugasNama">Nama Polisi</h2>
+                <p class="profile-info"><strong>Pangkat:</strong> <span id="petugasJabatan">-</span></p>
+                <p class="profile-info"><strong>Divisi:</strong> <span id="petugasDivisi">-</span></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1 style="text-align: center;">SOP Polisi Kuyland 2025</h1>
+
+        <input type="text" id="searchInput" placeholder="Cari kata kunci...">
+
+        <table>
+            <thead class="radio">
+                <tr>
+                    <th colspan="2">SOP RADIO</th>
+                </tr>
+                <tr>
+                    <th style="text-align: center;">KODE</th>
+                    <th style="text-align: center;">ARTI</th>
+                </tr>
+            </thead>
+            <tbody id="radioTable">
+                <tr>
+                    <td style="text-align: center;">8-1-0</td>
+                    <td style="text-align: left;">Izin berhenti bertugas (Off-duty)</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">8-1-1</td>
+                    <td style="text-align: left;">Izin mulai bertugas (On-duty)</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">8-1-2</td>
+                    <td style="text-align: left;">Izin Istirahat</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">8-1-3</td>
+                    <td style="text-align: left;">Izin Patroli</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">8-1</td>
+                    <td style="text-align: left;">Semua Unit Berkumpul Di Suatu Tempat (Wajib)</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">8-2</td>
+                    <td style="text-align: left;">Melaporkan Lokasi Atau Meminta Lokasi</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">8-3</td>
+                    <td style="text-align: left;">Berhenti Transmisi/Hapus Radio</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">8-6</td>
+                    <td style="text-align: left;">Dimengerti/Dipahami</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">8-8</td>
+                    <td style="text-align: left;">Menuju ke lokasi</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">8-9</td>
+                    <td style="text-align: left;">Pesan kurang jelas, Harap Diulangi Transmisi Radio</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">8-11</td>
+                    <td style="text-align: left;">Laporan Situasi (Melaporkan mengenai situasi yang terjadi)</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">8-14</td>
+                    <td style="text-align: left;">Butuh Jemputan / Transportasi</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">8-20</td>
+                    <td style="text-align: left;">Kembali ke kantor polisi</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">8-32</td>
+                    <td style="text-align: left;">Orang bersenjata</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">8-34</td>
+                    <td style="text-align: left;">Terjadi Kerusuhan</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">8-40</td>
+                    <td style="text-align: left;">Banyak Orang Di Area Tersebut</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">8-41</td>
+                    <td style="text-align: left;">Kemungkinan Aktivitas Ilegal sedang terjadi</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">8-47</td>
+                    <td style="text-align: left;">Lost Visual, Kehilangan Target / Suspect pengejaran</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">8-55</td>
+                    <td style="text-align: left;">Melakukan Penilangan</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">8-56</td>
+                    <td style="text-align: left;">Sedang terjadi Penembakan</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">8-57</td>
+                    <td style="text-align: left;">Melakukan pengejaran terhadap Tersangka</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">8-59</td>
+                    <td style="text-align: left;">Sedang terjadi Perampokan</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">8-60</td>
+                    <td style="text-align: left;">Ciri-ciri Kendaraan Tersangka (Terangkan Secara Detail)</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">8-61</td>
+                    <td style="text-align: left;">Ciri-ciri Tersangka (Terangkan Secara Detail)</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">8-70</td>
+                    <td style="text-align: left;">Meminta Bantuan Backup</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">8-99</td>
+                    <td style="text-align: left;">Situasi Selesai</td>
+                </tr>        
+            </tbody>
+        </table>
+        
+    <script>
+        // Handle search filtering
+        document.getElementById("searchInput").addEventListener("keyup", function() {
+            const filter = this.value.toLowerCase();
+            const tables = ['radioTable'];  
+
+            tables.forEach(tableId => {
+                const table = document.getElementById(tableId);
+                const rows = table.getElementsByTagName("tr");
+                for (let i = 0; i < rows.length; i++) {
+                    const cells = rows[i].getElementsByTagName("td");
+                    let rowContainsKeyword = false;
+                    for (let j = 0; j < cells.length; j++) {
+                        const cellText = cells[j].textContent.toLowerCase();
+                        if (cellText.includes(filter)) {
+                            rowContainsKeyword = true;
+                            break;
+                        }
+                    }
+                    rows[i].style.display = (i === 0 || rowContainsKeyword) ? "" : "none";
+                }
+            });
+        });
+
+        // Get username from sessionStorage and display in navbar
+        const username = sessionStorage.getItem("username");
+        if (username) {
+            document.getElementById("user-name").textContent = username;
+        }
+
+        // Toggle profile menu saat foto profil diklik
+        const userInfo = document.getElementById("user-info");
+        const profileMenu = document.getElementById("profile-menu");
+
+        userInfo.addEventListener("click", function() {
+            // Toggle menu profile
+            profileMenu.style.display = (profileMenu.style.display === "block") ? "none" : "block";
+        });
+
+        // Toggle menu UUD saat diklik
+        const servicesLink = document.querySelector(".services");
+        const servicesDropdown = document.querySelector(".services .drop-down");
+
+        servicesLink.addEventListener("click", function(event) {
+            // Tidak mencegah default action pada UUD, hanya toggle dropdown
+            servicesDropdown.style.display = (servicesDropdown.style.display === "block") ? "none" : "block";
+        });
+
+        // Menutup menu jika klik di luar area profil
+        document.addEventListener("click", function(event) {
+            if (!userInfo.contains(event.target)) {
+                profileMenu.style.display = "none";
+            }
+            if (!servicesLink.contains(event.target)) {
+                servicesDropdown.style.display = "none";
+            }
+        });
+
+        document.getElementById("openProfile").addEventListener("click", function() {
+        document.getElementById("profileModal").style.display = "flex";
+        document.getElementById("petugasNama").textContent = sessionStorage.getItem("username") || "Nama Polisi";
+        document.getElementById("petugasDivisi").textContent = sessionStorage.getItem("division") || "-";
+        document.getElementById("petugasJabatan").textContent = sessionStorage.getItem("rank") || "-";
+    });
+
+    document.getElementById("closeProfile").addEventListener("click", function() {
+        document.getElementById("profileModal").style.display = "none";
+    });
+
+        // Load users data function (similar to login script)
+        async function loadUsers() {
+        try {
+            const response = await fetch('default-users.json');
+            if (!response.ok) throw new Error('Failed to load users data');
+            return await response.json();
+        } catch (error) {
+            console.error('Error loading users:', error);
+            Swal.fire({
+                title: 'Error!',
+                text: 'Gagal memuat data users!',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return [];
+        }
+    }
+
+    // Check if user is logged in when page loads
+    window.addEventListener('load', async () => {
+        const username = sessionStorage.getItem("username");
+        if (!username) {
+            // Redirect to login page if no session exists
+            window.location.href = "index.html";
+            return;
+        }
+
+        // Verify user exists in default-users.json
+        const users = await loadUsers();
+        const user = users.find(u => u.name === username);
+        if (!user) {
+            // Clear invalid session and redirect to login
+            sessionStorage.clear();
+            window.location.href = "index.html";
+            return;
+        }
+
+        // Update UI with user information
+        document.getElementById("user-name").textContent = username;
+    });
+    </script>
+</body>
+</html>

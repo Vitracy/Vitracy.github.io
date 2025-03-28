@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Kepolisian - Polisi Kuyland</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background: #f5f5f5;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #1f2937;
+            font-size: 24px;
+        }
+
+        .header-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .view-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            padding: 10px 20px;
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .refresh-btn, .add-btn, .back-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .refresh-btn {
+            background-color: #3b82f6;
+            color: white;
+        }
+
+        .add-btn {
+            background-color: #10b981;
+            color: white;
+        }
+
+        .back-btn {
+            background-color: #1f2937;
+            color: white;
+        }
+
+        /* Desktop Table Styles */
+        .desktop-view .users-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .desktop-view .users-table th,
+        .desktop-view .users-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .desktop-view .users-table th {
+            background-color: #1f2937;
+            color: white;
+        }
+
+        /* Mobile Card Styles */
+        .mobile-view .users-table {
+            display: none;
+        }
+
+        .mobile-view .user-cards {
+            display: grid;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .user-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .user-card-header {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            color: #1f2937;
+        }
+
+        .user-card-content {
+            margin-bottom: 15px;
+        }
+
+        .user-card-content p {
+            margin: 5px 0;
+            color: #4b5563;
+        }
+
+        .user-card-actions {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .edit-request-btn {
+            padding: 8px 16px;
+            background-color: #f59e0b;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Responsive SweetAlert Styles */
+        .swal2-popup {
+            font-size: 0.9em !important;
+        }
+
+        .swal2-input {
+            margin: 10px auto !important;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+
+            .search-container {
+                flex-direction: column;
+            }
+
+            .button-group {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .refresh-btn, .add-btn, .back-btn {
+                padding: 8px 12px;
+                font-size: 0.9em;
+            }
+
+            .swal2-popup {
+                padding: 0.5em;
+            }
+
+            .swal2-input {
+                margin: 5px auto !important;
+            }
+        }
+        @media (max-width: 768px) {
+        .mobile-swal-container {
+            padding: 0.5rem;
+        }
+
+        .mobile-swal-popup {
+            font-size: 0.9rem !important;
+            padding: 1rem !important;
+            width: 90% !important;
+            margin: 0.5rem auto !important;
+        }
+
+        .mobile-swal-input {
+            font-size: 1rem !important;
+            height: 2.5rem !important;
+            margin: 0.5rem 0 !important;
+        }
+
+        .swal2-title {
+            font-size: 1.2rem !important;
+            padding: 0.5rem 0 !important;
+        }
+
+        .swal2-html-container {
+            margin: 0.5rem 0 !important;
+        }
+
+        .swal2-actions {
+            margin: 1rem 0 0 !important;
+        }
+
+        .swal2-confirm, .swal2-deny, .swal2-cancel {
+            font-size: 0.9rem !important;
+            padding: 0.5rem 1rem !important;
+        }
+    }
+    </style>
+</head>
+<body>
+    <div class="container desktop-view" id="mainContainer">
+        <div class="header-actions">
+            <button class="back-btn" onclick="window.location.href='index.html'">Kembali ke Login</button>
+        </div>
+        
+        <h1>Data Kepolisian Polisi Kuyland</h1>
+        
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="Cari nama...">
+            <div class="button-group">
+                <button class="refresh-btn" onclick="refreshData()">
+                    Refresh Data
+                </button>
+                <button class="add-btn" onclick="showAddUserForm()">
+                    Minta Tambah User
+                </button>
+            </div>
+        </div>
+
+        <!-- Desktop Table View -->
+        <table class="users-table">
+            <thead>
+                <tr>
+                    <th>Nama</th>
+                    <th>Pangkat</th>
+                    <th>Divisi</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="usersTableBody">
+                <!-- Users will be loaded here -->
+            </tbody>
+        </table>
+
+        <!-- Mobile Card View -->
+        <div class="user-cards" id="userCards">
+            <!-- Users will be loaded here as cards -->
+        </div>
+    </div>
+
+    <!-- View Toggle Button -->
+    <button class="view-toggle" id="viewToggle" onclick="toggleView()">
+        Switch to Mobile View
+    </button>
+    <script>
+        // Discord webhook URLs configuration
+        const DISCORD_WEBHOOK_URLS = {
+            edit: 'https://discord.com/api/webhooks/1343061857405112342/BDyzy88VMGcQ81SV6ot8NtQV7UYgm1yUr6Tpnx4VkZicO-d932omx5NbgvQ8jY7mZGDo',
+            delete: 'https://discord.com/api/webhooks/1343062796291674229/VYA3Ake62WytnvzKWkXZOYE6ltn1HhL8A8yolI3EWeVF0T_YbIv9NMBWdsblZcP9OzUs',
+            add: 'https://discord.com/api/webhooks/1343062948628926577/EnVH9pswAbxxURG-0oAJ49ztgMTl9WvzOqqavTWGekZuOJnw3LA5ADwGA2rPTwsm_upD'
+        };
+        
+        // View state
+        let isMobileView = false;
+        
+        // Check password and initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!sessionStorage.getItem('isAuthenticated')) {
+                promptPassword();
+            } else {
+                showMainContent();
+            }
+        
+            // Add search functionality
+            document.getElementById('searchInput').addEventListener('input', filterUsers);
+            
+            // Check if should default to mobile view
+            if (window.innerWidth <= 768) {
+                toggleView();
+            }
+        });
+        
+        // Password prompt function
+        function promptPassword() {
+            Swal.fire({
+                title: 'Enter Password',
+                input: 'password',
+                inputPlaceholder: 'Enter password',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                grow: window.innerWidth <= 768 ? 'fullscreen' : false,
+                inputValidator: (value) => {
+                    if (!value) {
+                        return 'Password is required!';
+                    }
+                    if (value !== 'polku123') {
+                        return 'Incorrect password!';
+                    }
+                }
+            }).then((result) => {
+                if (result.value === 'polku123') {
+                    sessionStorage.setItem('isAuthenticated', 'true');
+                    showMainContent();
+                } else {
+                    promptPassword();
+                }
+            });
+        }
+        
+        // Show main content function
+        function showMainContent() {
+            document.getElementById('mainContainer').style.display = 'block';
+            loadUsers();
+        }
+        
+        // Toggle between mobile and desktop views
+        function toggleView() {
+            const container = document.getElementById('mainContainer');
+            const toggleButton = document.getElementById('viewToggle');
+            isMobileView = !isMobileView;
+        
+            if (isMobileView) {
+                container.classList.remove('desktop-view');
+                container.classList.add('mobile-view');
+                toggleButton.textContent = 'Switch to Desktop View';
+            } else {
+                container.classList.remove('mobile-view');
+                container.classList.add('desktop-view');
+                toggleButton.textContent = 'Switch to Mobile View';
+            }
+        
+            loadUsers();
+        }
+        
+        // Load users from JSON file
+        async function loadUsers() {
+            try {
+                const response = await fetch('default-users.json');
+                if (!response.ok) throw new Error('Failed to load users data');
+                
+                const users = await response.json();
+                displayUsers(users);
+            } catch (error) {
+                console.error('Error loading users:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Gagal memuat data users!',
+                    grow: window.innerWidth <= 768 ? 'fullscreen' : false
+                });
+            }
+        }
+        
+        // Display users in both table and card format
+        function displayUsers(users) {
+            // Update table view
+            const tableBody = document.getElementById('usersTableBody');
+            tableBody.innerHTML = '';
+        
+            // Update card view
+            const cardsContainer = document.getElementById('userCards');
+            cardsContainer.innerHTML = '';
+        
+            users.forEach(user => {
+                // Create table row
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${user.name}</td>
+                    <td>${user.rank}</td>
+                    <td>${user.division}</td>
+                    <td>
+                        <button class="edit-request-btn" onclick="requestEdit('${user.name}', '${user.rank}', '${user.division}')">
+                            Minta Edit
+                        </button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+        
+                // Create card for mobile view
+                const card = document.createElement('div');
+                card.className = 'user-card';
+                card.innerHTML = `
+                    <div class="user-card-header">${user.name}</div>
+                    <div class="user-card-content">
+                        <p><strong>Pangkat:</strong> ${user.rank}</p>
+                        <p><strong>Divisi:</strong> ${user.division}</p>
+                    </div>
+                    <div class="user-card-actions">
+                        <button class="edit-request-btn" onclick="requestEdit('${user.name}', '${user.rank}', '${user.division}')">
+                            Minta Edit
+                        </button>
+                    </div>
+                `;
+                cardsContainer.appendChild(card);
+            });
+        }
+        
+        // Filter users based on search input
+        function filterUsers() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            
+            if (isMobileView) {
+                // Filter cards
+                const cards = document.querySelectorAll('.user-card');
+                cards.forEach(card => {
+                    const name = card.querySelector('.user-card-header').textContent.toLowerCase();
+                    card.style.display = name.includes(searchTerm) ? '' : 'none';
+                });
+            } else {
+                // Filter table rows
+                const rows = document.getElementById('usersTableBody').getElementsByTagName('tr');
+                Array.from(rows).forEach(row => {
+                    const name = row.cells[0].textContent.toLowerCase();
+                    row.style.display = name.includes(searchTerm) ? '' : 'none';
+                });
+            }
+        }
+        
+// Fungsi untuk mendapatkan konfigurasi SweetAlert yang sesuai untuk mobile/desktop
+function getSwalConfig(config) {
+    const isMobile = window.innerWidth <= 768;
+    
+    // Konfigurasi dasar untuk mobile
+    const mobileConfig = {
+        width: '90%',
+        padding: '1rem',
+        customClass: {
+            container: 'mobile-swal-container',
+            popup: 'mobile-swal-popup',
+            input: 'mobile-swal-input'
+        }
+    };
+
+    // Jika mobile, gabungkan konfigurasi mobile dengan konfigurasi yang diberikan
+    return isMobile ? { ...config, ...mobileConfig } : config;
+}
+
+// Modifikasi fungsi requestEdit
+async function requestEdit(name, currentRank, currentDivision) {
+    const swalConfig = getSwalConfig({
+        title: 'Request Edit Data',
+        html: `
+            <input id="swal-name" class="swal2-input" placeholder="Nama Baru" value="${name}">
+            <input id="swal-rank" class="swal2-input" placeholder="Pangkat Baru" value="${currentRank}">
+            <input id="swal-division" class="swal2-input" placeholder="Divisi Baru" value="${currentDivision}">
+        `,
+        focusConfirm: false,
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: 'Kirim Request',
+        denyButtonText: 'Minta Hapus',
+        denyButtonColor: '#ef4444',
+        cancelButtonText: 'Batal',
+        preConfirm: () => {
+            return {
+                name: document.getElementById('swal-name').value,
+                newRank: document.getElementById('swal-rank').value,
+                newDivision: document.getElementById('swal-division').value
+            }
+        }
+    });
+
+    const result = await Swal.fire(swalConfig);
+
+    if (result.isConfirmed) {
+        await sendWebhookMessage({
+            type: 'edit',
+            title: '📋 Request Edit Data Kepolisian',
+            oldData: { name, rank: currentRank, division: currentDivision },
+            newData: result.value
+        });
+    } else if (result.isDenied) {
+        const deleteConfirm = await Swal.fire(getSwalConfig({
+            title: 'Konfirmasi Hapus',
+            text: `Apakah anda yakin ingin menghapus data ${name}?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#ef4444',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Ya, Hapus!',
+            cancelButtonText: 'Batal'
+        }));
+
+        if (deleteConfirm.isConfirmed) {
+            await sendWebhookMessage({
+                type: 'delete',
+                title: '🗑️ Request Hapus Data Kepolisian',
+                data: { name, rank: currentRank, division: currentDivision }
+            });
+        }
+    }
+}
+
+// Modifikasi fungsi showAddUserForm
+async function showAddUserForm() {
+    const { value: formValues } = await Swal.fire(getSwalConfig({
+        title: 'Minta Tambah User Baru',
+        html: `
+            <input id="swal-name" class="swal2-input" placeholder="Nama">
+            <input id="swal-rank" class="swal2-input" placeholder="Pangkat">
+            <input id="swal-division" class="swal2-input" placeholder="Divisi">
+        `,
+        focusConfirm: false,
+        showCancelButton: true,
+        confirmButtonText: 'Kirim Request',
+        cancelButtonText: 'Batal',
+        preConfirm: () => {
+            return {
+                name: document.getElementById('swal-name').value,
+                rank: document.getElementById('swal-rank').value,
+                division: document.getElementById('swal-division').value
+            }
+        }
+    }));
+
+    if (formValues) {
+        await sendWebhookMessage({
+            type: 'add',
+            title: '➕ Request Tambah User Baru',
+            data: formValues
+        });
+    }
+}
+
+const newStyles = `
+    /* SweetAlert Mobile Styles */
+    @media (max-width: 768px) {
+        .mobile-swal-container {
+            padding: 0.5rem;
+        }
+
+        .mobile-swal-popup {
+            font-size: 0.9rem !important;
+            padding: 1rem !important;
+            width: 90% !important;
+            margin: 0.5rem auto !important;
+        }
+
+        .mobile-swal-input {
+            font-size: 1rem !important;
+            height: 2.5rem !important;
+            margin: 0.5rem 0 !important;
+        }
+
+        .swal2-title {
+            font-size: 1.2rem !important;
+            padding: 0.5rem 0 !important;
+        }
+
+        .swal2-html-container {
+            margin: 0.5rem 0 !important;
+        }
+
+        .swal2-actions {
+            margin: 1rem 0 0 !important;
+        }
+
+        .swal2-confirm, .swal2-deny, .swal2-cancel {
+            font-size: 0.9rem !important;
+            padding: 0.5rem 1rem !important;
+        }
+    }
+`;
+        
+// Send webhook message to Discord
+async function sendWebhookMessage({ type, title, oldData, newData, data }) {
+    try {
+        let fields = [];
+        let code = '';
+
+        switch (type) {
+            case 'edit':
+                fields = [
+                    {
+                        name: 'Data sebelumnya',
+                        value: `Nama : ${oldData.name}\nPangkat Lama : ${oldData.rank}\nDivisi Lama : ${oldData.division}`,
+                        inline: false
+                    },
+                    {
+                        name: 'Data diperbarui',
+                        value: `Nama Baru : ${newData.name}\nPangkat Baru : ${newData.newRank}\nDivisi Baru : ${newData.newDivision}`,
+                        inline: false
+                    }
+                ];
+                code = `{ "name": "${newData.name}", "rank": "${newData.newRank}", "division": "${newData.newDivision}" }`;
+                break;
+            case 'delete':
+                fields = [
+                    {
+                        name: 'Data yang akan dihapus',
+                        value: `Nama : ${data.name}\nPangkat : ${data.rank}\nDivisi : ${data.division}`,
+                        inline: false
+                    }
+                ];
+                code = `{ "name": "${data.name}", "rank": "${data.rank}", "division": "${data.division}" }`;
+                break;
+            case 'add':
+                fields = [
+                    {
+                        name: 'Data User Baru',
+                        value: `Nama : ${data.name}\nPangkat : ${data.rank}\nDivisi : ${data.division}`,
+                        inline: false
+                    }
+                ];
+                code = `{ "name": "${data.name}", "rank": "${data.rank}", "division": "${data.division}" }`;
+                break;
+        }
+
+        fields.push({
+            name: 'Code',
+            value: `\`\`\`${code}\`\`\``,
+            inline: false
+        });
+
+        const message = {
+            embeds: [{
+                title: title,
+                color: type === 'delete' ? 0xFF0000 : type === 'add' ? 0x00FF00 : 0x2B87FF,
+                fields: fields,
+                timestamp: new Date().toISOString()
+            }]
+        };
+
+        const response = await fetch(DISCORD_WEBHOOK_URLS[type], {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(message)
+        });
+
+        if (!response.ok) throw new Error('Failed to send to Discord');
+
+        // Modified success alert for better mobile experience
+        Swal.fire({
+            icon: 'success',
+            title: 'Berhasil',
+            text: type === 'delete' ? 'Request hapus telah dikirim ke admin!' : 
+                  type === 'add' ? 'Request tambah user telah dikirim ke admin!' :
+                  'Request edit telah dikirim ke admin!',
+            width: window.innerWidth <= 768 ? '90%' : '32rem',
+            padding: window.innerWidth <= 768 ? '0.5rem' : '1.25rem',
+            customClass: {
+                container: 'mobile-swal-container',
+                popup: 'mobile-swal-popup'
+            }
+        });
+    } catch (error) {
+        console.error('Error sending to Discord:', error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Gagal mengirim request!',
+            width: window.innerWidth <= 768 ? '90%' : '32rem',
+            padding: window.innerWidth <= 768 ? '0.5rem' : '1.25rem',
+            customClass: {
+                container: 'mobile-swal-container',
+                popup: 'mobile-swal-popup'
+            }
+        });
+    }
+}
+
+// Modified refresh data function
+function refreshData() {
+    loadUsers();
+    Swal.fire({
+        icon: 'success',
+        title: 'Refreshed!',
+        text: 'Data telah diperbarui',
+        timer: 1500,
+        showConfirmButton: false,
+        width: window.innerWidth <= 768 ? '90%' : '32rem',
+        padding: window.innerWidth <= 768 ? '0.5rem' : '1.25rem',
+        customClass: {
+            container: 'mobile-swal-container',
+            popup: 'mobile-swal-popup'
+        }
+    });
+}
+        </script>
+</body>
+</html>

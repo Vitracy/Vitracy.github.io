@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Undang-Undang</title>
+    <style>
+        body {
+            background-image: url('home.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px auto;
+            max-width: 1200px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .container button {
+            background-color: #1f2937;
+            color: #fff;
+            font-size: 12px;
+            padding: 10px 45px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .hartabenda {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        .senjata {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .keamanan {
+            background-color: #00ff3c;
+            color: #00f83a;
+        }
+        .narkoba {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        .aparatur {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .uangmerah {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .terorisme {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        #summary-container {
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        #summary-table th, #summary-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        #summary-table th {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .copy-button {
+            margin-top: 5px;
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .search-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px; /* Bisa disesuaikan */
+            margin: 0 auto;
+        }
+
+        #searchInput {
+            width: 96%;
+            padding: 12px 20px; /* Ruang lebih untuk ikon */
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #searchInput:focus {
+            border-color: #007bff;
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+        }
+
+        .search-container i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+            font-size: 18px;
+        }
+        .checkbox {
+            transform: scale(2.0); /* Skala 1.5 untuk memperbesar ukuran */
+            -webkit-transform: scale(2.0); /* Safari */
+            -moz-transform: scale(2.0); /* Firefox */
+            cursor: pointer; /* Menambahkan cursor pointer agar mudah di klik */
+        }
+
+        /*mulai navbar*/
+
+        .navbar {
+            background: #1f2937;
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 1.5rem;
+            margin: 0 auto;
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+            color: white;
+        }
+
+        .nav-link {
+            padding: 0.5rem 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+            color: white;
+        }
+
+        .nav-link a {
+            text-decoration: none;
+            color: currentColor;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: white;
+        }
+
+        .drop-down {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
+            background: antiquewhite;
+            color: black;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 0.5rem;
+            font-size: 12px;
+            display: none;
+            min-width: 150px;
+            color: white;
+        }
+
+        .drop-down li {
+            list-style: none;
+        }
+
+        .drop-down a {
+            display: block;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            color: black;
+            font-weight: 600;
+        }
+
+        .nav-link:hover {
+            background-color: black;
+            color: #fff;
+            border-radius: 0.5rem;
+        }
+
+        .services:hover .drop-down, .profile-menu {
+            display: block;
+        }
+
+        .services .dropdown-icon {
+            font-size: 18px;
+            transform: rotate(0deg);
+            transition: 0.3s ease-in-out all;
+        }
+
+        .services:hover .dropdown-icon {
+            transform: rotate(180deg);
+        }
+
+        .drop-down li:hover {
+            background: black;
+        }
+
+        .drop-down li:hover a {
+            color: #fff;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+
+        .logo span {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .user-info span {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .user-info img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+
+        /* Profil Menu */
+        .profile-menu {
+            position: absolute;
+            top: 35px; /* Menurunkan menu agar tepat di bawah foto */
+            left: 0;
+            background-color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 0.5rem;
+            display: none;
+            min-width: 150px;
+            padding: 0;
+            z-index: 10;
+        }
+
+        .profile-menu a {
+            padding: 0.5rem 1rem;
+            display: block;
+            text-decoration: none;
+            color: black;
+            font-weight: 600;
+        }
+
+        .profile-menu a:hover {
+            background: #f1f1f1;
+            color: black;
+        }
+
+        /* Menu "UUD" Dropdown */
+        .services .drop-down {
+            position: absolute;
+            top: 100%; /* Agar berada di bawah UUD */
+            left: 0;
+            background-color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 0.5rem;
+            display: none;
+            padding: 0;
+            min-width: 150px;
+        }
+
+        .services .drop-down a {
+            padding: 0.5rem 1rem;
+            display: block;
+            text-decoration: none;
+            color: black;
+            font-weight: 600;
+        }
+
+        .services .drop-down a:hover {
+            background: #1f2937;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            position: relative;
+            transform: scale(0.7);
+            animation: popUp 0.4s ease-in-out forwards;
+        }
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #1f2937;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .profile-name {
+            font-size: 26px;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #1f2937;
+        }
+        .profile-info {
+            font-size: 22px;
+            font-weight: bold;
+            color: #555;
+            margin: 5px 0;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes popUp {
+            from { transform: scale(0.7); }
+            to { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <script src="undang.js"></script>
+
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li class="logo">
+                <img src="logo polisi.png" alt="Logo Polisi">
+                <span>Polisi Kuyland</span>
+            </li>
+            <li class="nav-link">
+                <a href="sop.html">SOP</a>
+            </li>
+            <li class="nav-link services">
+                <a href="#">UUD</a>
+                <ul class="drop-down">
+                    <li><a href="undang.html">UUD Kuyland</a></li>
+                    <li><a href="berkendara.html">UUD Berkendara</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div class="user-info" id="user-info">
+            <span id="user-name">Silahkan Login terlebih dahulu!!</span>
+            <img src="profile.png" alt="User" id="user-img">
+            <div class="profile-menu" id="profile-menu">
+                <a href="#" id="openProfile">Profil</a>
+                <a href="index.html">Logout</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Modal Profil -->
+    <div id="profileModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeProfile">&times;</span>
+            <div class="profile-container">
+                <img src="profile.png" alt="Profile Picture" class="profile-img">
+                <h2 class="profile-name" id="petugasNama">Nama Polisi</h2>
+                <p class="profile-info"><strong>Pangkat:</strong> <span id="petugasJabatan">-</span></p>
+                <p class="profile-info"><strong>Divisi:</strong> <span id="petugasDivisi">-</span></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1 style="text-align: center;">UUD Polisi Kuyland 2025</h1>
+
+        <input type="text" id="searchInput" placeholder="Cari kata kunci...">
+
+        <table>
+            <thead class="nyawa">
+                <tr>
+                    <th colspan="5">TINDAK PIDANA TERHADAP NYAWA</th>
+                </tr>
+                <tr>
+                    <th>Pasal (Ayat)</th>
+                    <th>Ceklis</th>
+                    <th>Pelanggaran</th>
+                    <th>Denda</th>
+                    <th>Massa Tahanan</th>
+                </tr>
+            </thead>
+            <tbody id="nyawaTable">
+                <tr>
+                    <td>7(1)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="7(1)" data-tindak="Percobaan Terorisme"></td>
+                    <td style="text-align: left;">Percobaan Terorisme</td>
+                    <td>80000</td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td>8(1)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="8(1)" data-tindak="Pembunuhan"></td>
+                    <td style="text-align: left;">Pembunuhan</td>
+                    <td>80000</td>
+                    <td>70</td>
+                </tr>
+                <tr>
+                    <td>8(2)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="8(2)" data-tindak="Percobaan Pembunuhan"></td>
+                    <td style="text-align: left;">Percobaan Pembunuhan</td>
+                    <td>40000</td>
+                    <td>60</td>
+                </tr>
+                <tr>
+                    <td>9(1)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="9(1)" data-tindak="Penodongan ke warga"></td>
+                    <td style="text-align: left;">Penodongan ke warga</td>
+                    <td>30000</td>
+                    <td>40</td>
+                </tr>
+                <tr>
+                    <td>9(2)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="9(2)" data-tindak="Penyanderaan"></td>
+                    <td style="text-align: left;">Penyanderaan</td>
+                    <td>30000</td>
+                    <td>35</td>
+                </tr>
+            </tbody>
+        </table>               
+
+        <table> 
+            <thead class="hartabenda">
+                <tr>
+                    <th colspan="5">TINDAK PIDANA TERHADAP HARTA BENDA</th>
+                </tr>
+                <tr>
+                    <th>Pasal (Ayat)</th>
+                    <th>Ceklis</th>
+                    <th>Pelanggaran</th>
+                    <th>Denda</th>
+                    <th>Massa Tahanan</th>
+                </tr>
+            </thead>
+            <tbody id="hartabendaTable">
+                <tr>
+                    <td>10(1)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="10(1)" data-tindak="Memberikan informasi palsu"></td>
+                    <td style="text-align: left;">Memberikan informasi palsu</td>
+                    <td>2500</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>10(2)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="10(2)" data-tindak="Melakukan Penipuan"></td>
+                    <td style="text-align: left;">Melakukan Penipuan</td>
+                    <td>5000</td>
+                    <td>15</td>
+                </tr>
+                <tr>
+                    <td>11(1)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="11(1)" data-tindak="Pencurian"></td>
+                    <td style="text-align: left;">Pencurian</td>
+                    <td>5500</td>
+                    <td>15</td>
+                </tr>
+                <tr>
+                    <td>11(2)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="11(2)" data-tindak="Pembegalan"></td>
+                    <td style="text-align: left;">Pembegalan</td>
+                    <td>6000</td>
+                    <td>20</td>
+                </tr>
+                <tr>
+                    <td>12(1)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="12(1)" data-tindak="Perampokan warung"></td>
+                    <td style="text-align: left;">Perampokan warung</td>
+                    <td>80000</td>
+                    <td>80</td>
+                </tr>
+                <tr>
+                    <td>12(2)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="12(2)" data-tindak="Perampokan bank besar"></td>
+                    <td style="text-align: left;">Perampokan bank besar</td>
+                    <td>100000</td>
+                    <td>150</td>
+                </tr>
+            </tbody>
+        </table>   
+        
+        <table>
+            <thead class="senjata">
+                <tr>
+                    <th colspan="5">TINDAK PIDANA TERHADAP SENJATA</th>
+                </tr>
+                <tr>
+                    <th>Pasal (Ayat)</th>
+                    <th>Ceklis</th>
+                    <th>Pelanggaran</th>
+                    <th>Denda</th>
+                    <th>Massa Tahanan</th>
+                </tr>
+            </thead>
+            <tbody id="senjataTable">
+                <tr>
+                    <td>13(1)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="13(1)" data-tindak="Memiliki senjata tajam untuk kejahatan"></td>
+                    <td style="text-align: left;">Memiliki senjata tajam untuk kejahatan</td>
+                    <td>25000</td>
+                    <td>20</td>
+                </tr>
+                <tr>
+                    <td>13(2)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="13(2)" data-tindak="Senjata api illegal laras pendek"></td>
+                    <td style="text-align: left;">Senjata api illegal laras pendek</td>
+                    <td>10000</td>
+                    <td>20</td>
+                </tr>
+                <tr>
+                    <td>13(3)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="13(3)" data-tindak="Senjata api illegal laras menengah"></td>
+                    <td style="text-align: left;">Senjata api illegal laras menengah</td>
+                    <td>15000</td>
+                    <td>25</td>
+                </tr>
+                <tr>
+                    <td>13(4)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="13(4)" data-tindak="Senjata api illegal laras panjang"></td>
+                    <td style="text-align: left;">Senjata api illegal laras panjang</td>
+                    <td>20000</td>
+                    <td>30</td>
+                </tr>
+                <tr>
+                    <td>14(1)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="14(1)" data-tindak="Memproduksi senjata illegal"></td>
+                    <td style="text-align: left;">Memproduksi senjata illegal</td>
+                    <td>90000</td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td>14(2)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="14(2)" data-tindak="Memperdagangkan senjata api illegal"></td>
+                    <td style="text-align: left;">Memperdagangkan senjata api illegal</td>
+                    <td>25000</td>
+                    <td>40</td>
+                </tr>
+                <tr>
+                    <td>14(3)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="14(3)" data-tindak="Membuang senjata api"></td>
+                    <td style="text-align: left;">Membuang senjata api</td>
+                    <td>15000</td>
+                    <td>50</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <thead class="keamanan">
+                <tr>
+                    <th colspan="5">TINDAK PIDANA TERHADAP KEAMANAN DAN KETERTIBAN UMUM</th>
+                </tr>
+                <tr>
+                    <th>Pasal (Ayat)</th>
+                    <th>Ceklis</th>
+                    <th>Pelanggaran</th>
+                    <th>Denda</th>
+                    <th>Massa Tahanan</th>
+                </tr>
+            </thead>
+            <tbody id="keamananTable">
+                <tr>
+                    <td>15(1)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="15(1)" data-tindak="Tidak membawa kartu identitas"></td>
+                    <td style="text-align: left;">Tidak membawa kartu identitas</td>
+                    <td>1000</td>
+                    <td>Hukuman Sosial</td>
+                </tr>
+                <tr>
+                    <td>15(2)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="15(2)" data-tindak="Tidak ada izin di area TKP"></td>
+                    <td style="text-align: left;">Tidak ada izin di area TKP</td>
+                    <td>5500</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>15(3)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="15(3)" data-tindak="Pencemaran nama baik"></td>
+                    <td style="text-align: left;">Pencemaran nama baik</td>
+                    <td>5000</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>15(4)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="15(4)" data-tindak="Perkelahian di tempat umum"></td>
+                    <td style="text-align: left;">Perkelahian di tempat umum</td>
+                    <td>1500</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>15(5)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="15(5)" data-tindak="Melakukan hal tidak senonoh"></td>
+                    <td style="text-align: left;">Melakukan hal tidak senonoh</td>
+                    <td>1500</td>
+                    <td>Hukuman Sosial</td>
+                </tr>
+                <tr>
+                    <td>15(6)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="15(6)" data-tindak="Penganiayaan terhadap warga"></td>
+                    <td style="text-align: left;">Penganiayaan terhadap warga</td>
+                    <td>3000</td>
+                    <td>15</td>
+                </tr>
+                <tr>
+                    <td>15(7)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="15(7)" data-tindak="Membuat kerusuhan di tempat umum"></td>
+                    <td style="text-align: left;">Membuat kerusuhan di tempat umum</td>
+                    <td>1500</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>15(8)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="15(8)" data-tindak="Pembajakan"></td>
+                    <td style="text-align: left;">Pembajakan</td>
+                    <td>1000</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>15(9)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="15(9)" data-tindak="Peperangan antar kelompok"></td>
+                    <td style="text-align: left;">Peperangan antar kelompok</td>
+                    <td>7000</td>
+                    <td>20</td>
+                </tr>
+                <tr>
+                    <td>15(10)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="15(10)" data-tindak="Perkumpulan Ilegal"></td>
+                    <td style="text-align: left;">Perkumpulan Ilegal</td>
+                    <td>20000</td>
+                    <td>40</td>
+                </tr>
+                <tr>
+                    <td>16(1)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="16(1)" data-tindak="Di zona terlarang"></td>
+                    <td style="text-align: left;">Di zona terlarang</td>
+                    <td>10000</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>16(2)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="16(2)" data-tindak="Membawa hewan yang dilindungi"></td>
+                    <td style="text-align: left;">Membawa hewan yang dilindungi</td>
+                    <td>5000</td>
+                    <td>15</td>
+                </tr>
+                <tr>
+                    <td>16(3)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="16(3)" data-tindak="Pemburuan illegal"></td>
+                    <td style="text-align: left;">Pemburuan illegal</td>
+                    <td>5000</td>
+                    <td>15</td>
+                </tr>
+                <tr>
+                    <td>16(4)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="16(4)" data-tindak="Perjudian illegal"></td>
+                    <td style="text-align: left;">Perjudian illegal</td>
+                    <td>4000</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td>16(5)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="16(5)" data-tindak="Mabuk di tempat umum"></td>
+                    <td style="text-align: left;">Mabuk di tempat umum</td>
+                    <td>300</td>
+                    <td>Hukuman Sosial</td>
+                </tr>
+                <tr>
+                    <td>16(7)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="16(7)" data-tindak="Pelecehan seksual"></td>
+                    <td style="text-align: left;">Pelecehan seksual</td>
+                    <td>6000</td>
+                    <td>30</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <thead class="narkoba">
+                <tr>
+                    <th colspan="5">TINDAK PIDANA BARANG ILEGAL DAN NARKOBA</th>
+                </tr>
+                <tr>
+                    <th>Pasal (Ayat)</th>
+                    <th>Ceklis</th>
+                    <th>Pelanggaran</th>
+                    <th>Denda</th>
+                    <th>Massa Tahanan</th>
+                </tr>
+            </thead>
+            <tbody id="narkobaTable">
+                <tr>
+                    <td>17(1)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="17(1)" data-tindak="Penyalahgunaan barang netral"></td>
+                    <td style="text-align: left;">Penyalahgunaan barang netral</td>
+                    <td>5000</td>
+                    <td>15</td>
+                </tr>
+                <tr>
+                    <td>17(2)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="17(2)" data-tindak="Memiliki/menyimpan cocaine/kanabis"></td>
+                    <td style="text-align: left;">Memiliki/menyimpan cocaine/kanabis</td>
+                    <td>10000</td>
+                    <td>25</td>
+                </tr>
+                <tr>
+                    <td>17(3)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="17(3)" data-tindak="Melakukan penjualan cocaine/kanabis"></td>
+                    <td style="text-align: left;">Melakukan penjualan cocaine/kanabis</td>
+                    <td>25000</td>
+                    <td>30</td>
+                </tr>
+                <tr>
+                    <td>17(4)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="17(4)" data-tindak="Menanam tanaman cocaine/kanabis"></td>
+                    <td style="text-align: left;">Menanam tanaman cocaine/kanabis</td>
+                    <td>40000</td>
+                    <td>40</td>
+                </tr>
+                <tr>
+                    <td>17(5)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="17(5)" data-tindak="Memproduksi cocaine/kanabis"></td>
+                    <td style="text-align: left;">Memproduksi cocaine/kanabis</td>
+                    <td>70000</td>
+                    <td>80</td>
+                </tr>
+                <tr>
+                    <td>17(6)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="17(6)" data-tindak="Mengonsumsi cocaine/kanabis"></td>
+                    <td style="text-align: left;">Mengonsumsi cocaine/kanabis</td>
+                    <td>15000</td>
+                    <td>20</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <table>
+            <thead class="aparatur">
+                <tr>
+                    <th colspan="5">TINDAK PIDANA TERHADAP APARATUR NEGARA</th>
+                </tr>
+                <tr>
+                    <th>Pasal (Ayat)</th>
+                    <th>Ceklis</th>
+                    <th>Pelanggaran</th>
+                    <th>Denda</th>
+                    <th>Massa Tahanan</th>
+                </tr>
+            </thead>
+            <tbody id="aparaturTable">
+                <tr>
+                    <td>18(1)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="18(1)" data-tindak="Menghalangi tugas pemerintah"></td>
+                    <td style="text-align: left;">Menghalangi tugas pemerintah</td>
+                    <td>400</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td>18(2)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="18(2)" data-tindak="Menolak surat tilang/perintah resmi"></td>
+                    <td style="text-align: left;">Menolak surat tilang/perintah resmi</td>
+                    <td>1000</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td>18(3)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="18(3)" data-tindak="Melarikan diri saat hendak ditangkap"></td>
+                    <td style="text-align: left;">Melarikan diri saat hendak ditangkap</td>
+                    <td>4000</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>18(4)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="18(4)" data-tindak="Membahayakan petugas"></td>
+                    <td style="text-align: left;">Membahayakan petugas</td>
+                    <td>6500</td>
+                    <td>40</td>
+                </tr>
+                <tr>
+                    <td>18(5)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="18(5)" data-tindak="Menyerang petugas dengan kekerasan"></td>
+                    <td style="text-align: left;">Menyerang petugas dengan kekerasan</td>
+                    <td>5000</td>
+                    <td>60</td>
+                </tr>
+                <tr>
+                    <td>18(6)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="18(6)" data-tindak="Menyuap aparat pemerintah"></td>
+                    <td style="text-align: left;">Menyuap aparat pemerintah</td>
+                    <td>6000</td>
+                    <td>20</td>
+                </tr>
+                <tr>
+                    <td>18(7)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="18(7)" data-tindak="Pencemaran nama baik instansi"></td>
+                    <td style="text-align: left;">Pencemaran nama baik instansi</td>
+                    <td>3000</td>
+                    <td>10</td>
+                </tr>
+            </tbody>
+        </table>                               
+
+        <table>
+            <thead class="uangmerah">
+                <tr>
+                    <th colspan="5">TINDAK PIDANA UANG MERAH</th>
+                </tr>
+                <tr>
+                    <th>Pasal (Ayat)</th>
+                    <th>Ceklis</th>
+                    <th>Pelanggaran</th>
+                    <th>Denda</th>
+                    <th>Massa Tahanan</th>
+                </tr>
+            </thead>
+            <tbody id="uangmerahTable">
+                <tr>
+                    <td>19(1)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="19(1)" data-tindak="Memiliki uang merah 1k-20k"></td>
+                    <td style="text-align: left;">Memiliki uang merah 1k-20k</td>
+                    <td>10000</td>
+                    <td>20</td>
+                </tr>
+                <tr>
+                    <td>19(2)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="19(2)" data-tindak="Memiliki uang merah 21k-50k"></td>
+                    <td style="text-align: left;">Memiliki uang merah 21k-50k</td>
+                    <td>20000</td>
+                    <td>40</td>
+                </tr>
+                <tr>
+                    <td>19(3)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="19(3)" data-tindak="Memiliki uang merah 51k-100k"></td>
+                    <td style="text-align: left;">Memiliki uang merah 51k-100k</td>
+                    <td>30000</td>
+                    <td>40</td>
+                </tr>
+            </tbody>
+        </table>        
+
+        <table>
+            <thead class="terorisme">
+                <tr>
+                    <th colspan="5">TINDAK PIDANA TERORISME DAN HUKUMAN MATI</th>
+                </tr>
+                <tr>
+                    <th>Pasal (Ayat)</th>
+                    <th>Ceklis</th>
+                    <th>Pelanggaran</th>
+                    <th>Denda</th>
+                    <th>Massa Tahanan</th>
+                </tr>
+            </thead>
+            <tbody id="terorismeTable">
+                <tr>
+                    <td>20(1)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="20(1)" data-tindak="Terorisme"></td>
+                    <td style="text-align: left;">Terorisme</td>
+                    <td>150000</td>
+                    <td>Hukuman Mati</td>
+                </tr>
+                <tr>
+                    <td>20(2)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="20(2)" data-tindak="Penembakan diarea kantor hukum"></td>
+                    <td style="text-align: left;">Penembakan diarea kantor hukum</td>
+                    <td>120000</td>
+                    <td>Hukuman Mati</td>
+                </tr>
+                <tr>
+                    <td>20(3)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="20(3)" data-tindak="Penyanderaan skala besar"></td>
+                    <td style="text-align: left;">Penyanderaan skala besar</td>
+                    <td>120000</td>
+                    <td>Hukuman Mati</td>
+                </tr>
+                <tr>
+                    <td>20(4)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="20(4)" data-tindak="Penyanderaan instansi"></td>
+                    <td style="text-align: left;">Penyanderaan instansi</td>
+                    <td>120000</td>
+                    <td>Hukuman Mati</td>
+                </tr>
+                <tr>
+                    <td>20(5)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="20(5)" data-tindak="Tindakan mengakibatkan kota siaga 3"></td>
+                    <td style="text-align: left;">Tindakan mengakibatkan kota siaga 3</td>
+                    <td>130000</td>
+                    <td>Hukuman Mati</td>
+                </tr>
+                <tr>
+                    <td>20(6)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="20(6)" data-tindak="Menggangu proses jalan peleburan"></td>
+                    <td style="text-align: left;">Menggangu proses jalan peleburan</td>
+                    <td>140000</td>
+                    <td>Hukuman Mati</td>
+                </tr>
+                <tr>
+                    <td>20(7)</td>
+                    <td><input type="checkbox" class="checkbox" data-uu="20(7)" data-tindak="Catatan criminal sebanyak 7 kali"></td>
+                    <td style="text-align: left;">Catatan criminal sebanyak 7 kali</td>
+                    <td>120000</td>
+                    <td>Hukuman Mati</td>
+                </tr>
+            </tbody>
+        </table>        
+
+        <button id="submit" style="margin: 20px; padding: 10px 20px; font-size: 16px;">Submit</button>
+        <button id="kirim-discord" style="margin: 20px; padding: 10px 20px; font-size: 16px;">Kirimkan Ke Discord</button>
+        <button id="reset" style="margin: 20px; padding: 10px 20px; font-size: 16px;">Reset</button>
+
+        
+        <div id="summary-container">
+            <h2>Ringkasan</h2>
+            <table id="summary-table" style="display: none; width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th>UU</th>
+                        <th>Tindak Pidana</th>
+                        <th>Denda</th>
+                        <th>Penjara</th>
+                        <th>Lokasi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="uu-summary"></td>
+                        <td id="tindak-summary"></td>
+                        <td id="denda-summary"></td>
+                        <td id="penjara-summary"></td>
+                        <td id="lokasi-summary"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="button-container">
+                <button class="copy-button" id="copy-uu">Salin UU</button>
+                <button class="copy-button" id="copy-tindak">Salin Tindak Pidana</button>
+                <button class="copy-button" id="copy-denda">Salin Denda</button>
+                <button class="copy-button" id="copy-penjara">Salin Penjara</button>
+                <button class="copy-button" id="copy-lokasi">Salin Lokasi</button>
+            </div>
+        </div>        
+
+
+    <script>
+// Get username from sessionStorage and display in navbar
+const username = sessionStorage.getItem("username");
+if (username) {
+    document.getElementById("user-name").textContent = username;
+}
+
+// Toggle profile menu when profile photo is clicked
+const userInfo = document.getElementById("user-info");
+const profileMenu = document.getElementById("profile-menu");
+
+userInfo.addEventListener("click", function() {
+    profileMenu.style.display = (profileMenu.style.display === "block") ? "none" : "block";
+});
+
+// Toggle UUD menu when clicked
+const servicesLink = document.querySelector(".services");
+const servicesDropdown = document.querySelector(".services .drop-down");
+
+servicesLink.addEventListener("click", function(event) {
+    servicesDropdown.style.display = (servicesDropdown.style.display === "block") ? "none" : "block";
+});
+
+// Close menu if clicked outside profile area
+document.addEventListener("click", function(event) {
+    if (!userInfo.contains(event.target)) {
+        profileMenu.style.display = "none";
+    }
+    if (!servicesLink.contains(event.target)) {
+        servicesDropdown.style.display = "none";
+    }
+});
+
+// Handle search filtering
+document.getElementById("searchInput").addEventListener("keyup", function() {
+    const filter = this.value.toLowerCase();
+    const tables = ['keamananTable', 'aparaturTable', 'hartabendaTable', 'narkobaTable', 'senjataTable', 'nyawaTable', 'terorismeTable', 'uangmerahTable'];
+
+    tables.forEach(tableId => {
+        const table = document.getElementById(tableId);
+        const rows = table.getElementsByTagName("tr");
+        for (let i = 0; i < rows.length; i++) {
+            const cells = rows[i].getElementsByTagName("td");
+            let rowContainsKeyword = false;
+            for (let j = 0; j < cells.length; j++) {
+                const cellText = cells[j].textContent.toLowerCase();
+                if (cellText.includes(filter)) {
+                    rowContainsKeyword = true;
+                    break;
+                }
+            }
+            rows[i].style.display = (i === 0 || rowContainsKeyword) ? "" : "none";
+        }
+    });
+});
+
+document.getElementById("openProfile").addEventListener("click", function() {
+        document.getElementById("profileModal").style.display = "flex";
+        document.getElementById("petugasNama").textContent = sessionStorage.getItem("username") || "Nama Polisi";
+        document.getElementById("petugasDivisi").textContent = sessionStorage.getItem("division") || "-";
+        document.getElementById("petugasJabatan").textContent = sessionStorage.getItem("rank") || "-";
+    });
+
+    document.getElementById("closeProfile").addEventListener("click", function() {
+        document.getElementById("profileModal").style.display = "none";
+    });
+
+// Handle submit button action 
+document.getElementById("submit").addEventListener("click", () => {
+    const checkboxes = document.querySelectorAll(".checkbox:checked");
+    let totalDenda = 0;
+    let totalPenjara = 0;
+    const uuSummary = [];
+    const tindakSummary = [];
+    let penjaraTextGlobal = '';
+    let lokasi = '';
+
+    checkboxes.forEach((checkbox) => {
+        uuSummary.push(checkbox.dataset.uu);
+        tindakSummary.push(checkbox.dataset.tindak);
+
+        // Denda
+        const denda = parseInt(checkbox.closest('tr').cells[3].textContent);
+        totalDenda += denda;
+
+        // Penjara
+        const penjaraText = checkbox.closest('tr').cells[4].textContent;
+
+        if (penjaraText === "Hukuman Mati") {
+            penjaraTextGlobal = "Hukuman Mati";
+            totalPenjara = "Hukuman Mati";
+        } else if (penjaraText === "Hukuman Sosial") {
+            totalPenjara += 0;
+        } else {
+            const penjara = parseInt(penjaraText);
+            totalPenjara += penjara;
+        }
+    });
+
+    // Format totalPenjara untuk tampilan dengan menambahkan "Bulan" jika berupa angka
+    let displayPenjara = totalPenjara;
+    if (typeof totalPenjara === 'number') {
+        displayPenjara = `${totalPenjara} Bulan`;
+    }
+
+    // Determine Lokasi based on totalPenjara
+    if (totalPenjara === "Hukuman Mati") {
+        lokasi = "Federal";
+    } else if (totalPenjara <= 60) {
+        lokasi = "Kantor Pusat";
+    } else {
+        lokasi = "Federal";
+    }
+
+    // Display summary
+    if (checkboxes.length > 0) {
+        document.getElementById("summary-table").style.display = 'table';
+        document.getElementById("uu-summary").textContent = uuSummary.join(", ");
+        document.getElementById("tindak-summary").textContent = tindakSummary.join(", ");
+        document.getElementById("denda-summary").textContent = totalDenda;
+        document.getElementById("penjara-summary").textContent = displayPenjara;
+        document.getElementById("lokasi-summary").textContent = lokasi;
+    }
+
+    // Handle copy buttons
+    const copyButtons = {
+        "copy-uu": "uu-summary",
+        "copy-tindak": "tindak-summary",
+        "copy-denda": "denda-summary",
+        "copy-penjara": "penjara-summary",
+        "copy-lokasi": "lokasi-summary"
+    };
+
+    Object.entries(copyButtons).forEach(([buttonId, summaryId]) => {
+        document.getElementById(buttonId).addEventListener("click", () => {
+            const text = document.getElementById(summaryId).textContent;
+            if (text) {
+                navigator.clipboard.writeText(text).catch(err => {
+                    console.error(`Failed to copy ${summaryId}: ${err}`);
+                });
+            }
+        });
+    });
+});
+
+// Handle reset button action
+document.getElementById("reset").addEventListener("click", () => {
+    const checkboxes = document.querySelectorAll(".checkbox");
+    checkboxes.forEach((checkbox) => {
+        checkbox.checked = false;
+    });
+
+    document.getElementById("summary-table").style.display = 'none';
+    document.getElementById("uu-summary").textContent = '';
+    document.getElementById("tindak-summary").textContent = '';
+    document.getElementById("denda-summary").textContent = '';
+    document.getElementById("penjara-summary").textContent = '';
+});
+
+// Function to send to appropriate webhook based on detention location
+function sendToDiscordWebhook(laporan, lokasiPenahanan) {
+    const webhookURLs = {
+        "Federal": "https://discord.com/api/webhooks/1335227184180363356/3G1SCPsqO8WKbRX1oYKCTuCw20FH3UtDY4oEkQKNp-7ZZYfNtdVFcP09mcEmMo4xnERf",
+        "Kantor Pusat": "https://discord.com/api/webhooks/1335228644276174858/u1Fmr29mLJbG0OQ1o6vqTiF9XkPxqxwzAVfwgiSrXD9BE2umlEwwKGf8gwOR9RiAAxJe"
+    };
+
+    fetch(webhookURLs[lokasiPenahanan], {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(laporan)
+    }).then(response => {
+        if (response.ok) {
+            Swal.fire({
+                title: 'Berhasil!',
+                text: 'Laporan penahanan berhasil dikirim!',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        } else {
+            Swal.fire({
+                title: 'Gagal!',
+                text: 'Laporan gagal dikirim, coba lagi nanti.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        }
+    }).catch(error => {
+        console.error("Error:", error);
+        Swal.fire({
+            title: 'Gagal!',
+            text: 'Terjadi kesalahan, coba lagi nanti.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+    });
+}
+
+document.getElementById("kirim-discord").addEventListener("click", () => {
+    const totalDenda = parseInt(document.getElementById("denda-summary").textContent);
+    const totalPenjara = document.getElementById("penjara-summary").textContent.trim();
+    const tindakSummary = document.getElementById("tindak-summary").textContent.trim();
+    const uuSummary = document.getElementById("uu-summary").textContent.trim();
+
+    // Validate if required fields are empty
+    if (!totalDenda || !uuSummary || !totalPenjara || !tindakSummary) {
+        Swal.fire({
+            title: 'Gagal!',
+            text: 'Harap lakukan submit terlebih dahulu. Denda, Pasal, Hukuman/Masa Tahanan, dan Deskripsi Pelanggaran wajib diisi sebelum mengirim laporan!',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+        return;
+    }
+
+    // Variabel untuk menyimpan data tersangka
+    let namaTersangka = '';
+    let noHpTersangka = '';
+    let fotoKtp = '';
+    let deskripsiBarangBukti = '';
+    let jumlahBarangBukti = '';
+
+    // Get data through pop-up
+    Swal.fire({
+        title: 'Masukkan Nama Tersangka:',
+        input: 'text',
+        inputPlaceholder: 'Nama Tersangka',
+        showCancelButton: true,
+        cancelButtonText: 'Kembali'
+    }).then(result => {
+        if (result.isDismissed) return;
+        namaTersangka = result.value.trim();
+        if (!namaTersangka) {
+            Swal.fire({
+                title: 'Gagal!',
+                text: 'Nama Tersangka tidak boleh kosong!',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return Promise.reject('Nama Tersangka tidak boleh kosong!');
+        }
+
+        return Swal.fire({
+            title: 'Masukkan Nomor Handphone Tersangka:',
+            input: 'text',
+            inputPlaceholder: 'Nomor Handphone',
+            showCancelButton: true,
+            cancelButtonText: 'Kembali'
+        });
+    }).then(result => {
+        if (!result || result.isDismissed) return Promise.reject('Dibatalkan');
+        noHpTersangka = result.value.trim();
+        if (!noHpTersangka) {
+            Swal.fire({
+                title: 'Gagal!',
+                text: 'Nomor Handphone Tersangka tidak boleh kosong!',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return Promise.reject('Nomor Handphone Tersangka tidak boleh kosong!');
+        }
+
+        return Swal.fire({
+            title: 'Apakah Ada Foto KTP?',
+            input: 'select',
+            inputOptions: {
+                'Ada': 'Ada',
+                'Tidak': 'Tidak'
+            },
+            showCancelButton: true,
+            cancelButtonText: 'Kembali'
+        });
+    }).then(result => {
+        if (!result || result.isDismissed) return Promise.reject('Dibatalkan');
+        fotoKtp = result.value;
+        
+        return Swal.fire({
+            title: 'Masukkan Deskripsi Barang Bukti:',
+            input: 'text',
+            inputPlaceholder: 'Deskripsi Barang Bukti',
+            showCancelButton: true,
+            cancelButtonText: 'Kembali'
+        });
+    }).then(result => {
+        if (!result || result.isDismissed) return Promise.reject('Dibatalkan');
+        deskripsiBarangBukti = result.value.trim();
+        
+        return Swal.fire({
+            title: 'Masukkan Jumlah Barang Bukti:',
+            input: 'text',
+            inputPlaceholder: 'Jumlah Barang Bukti',
+            showCancelButton: true,
+            cancelButtonText: 'Kembali'
+        });
+    }).then(result => {
+        if (!result || result.isDismissed) return Promise.reject('Dibatalkan');
+        jumlahBarangBukti = result.value.trim();
+        
+        // Mengumpulkan semua data
+        const lokasiPenahanan = totalPenjara.includes("Hukuman Mati") ? "Federal" : 
+                               (parseInt(totalPenjara) > 60 ? "Federal" : "Kantor Pusat");
+        
+        const petugasNama = sessionStorage.getItem("username");
+        const petugasDivisi = sessionStorage.getItem("division");
+        const petugasJabatan = sessionStorage.getItem("rank");
+
+        if (!petugasNama || !petugasDivisi || !petugasJabatan) {
+            throw new Error('Data petugas tidak lengkap! Pastikan nama, divisi, dan jabatan petugas sudah terisi.');
+        }
+
+        // Format hukuman untuk laporan
+        let displayHukuman = totalPenjara;
+
+        const laporan = {
+            content: `**LAPORAN PENAHANAN**\n\n**I. Informasi Penahanan:**\n- Nomor Laporan Penahanan: ${Math.floor(Math.random() * 10000)}\n- Tanggal dan Waktu Penahanan: ${new Date().toLocaleString()}\n- Lokasi Penahanan: ${lokasiPenahanan}\n- Deskripsi Pelanggaran: ${tindakSummary}\n\n**II. Informasi Tersangka:**\n- Nama Tersangka: ${namaTersangka}\n- Nomor Handphone: ${noHpTersangka}\n- Hukuman/Masa Tahanan: ${displayHukuman}\n- Pasal: ${uuSummary}\n- Denda: $${totalDenda.toLocaleString()}\n- Foto KTP: ${fotoKtp}\n\n**III. Identitas Petugas yang Menahan:**\n- Nama Petugas: ${petugasNama}\n- Divisi: ${petugasDivisi}\n- Jabatan: ${petugasJabatan}\n- Rekan: Semua Anggota yang Membantu\n\n**IV. Barang Bukti yang Disita:**\n- Deskripsi Barang Bukti: ${deskripsiBarangBukti}\n- Jumlah Barang Bukti: ${jumlahBarangBukti}`
+        };
+
+        // Panggil fungsi untuk mengirim ke Discord
+        sendToDiscordWebhook(laporan, lokasiPenahanan);
+    }).catch(error => {
+        if (error !== 'Dibatalkan') {
+            Swal.fire({
+                title: 'Gagal!',
+                text: error || 'Terjadi kesalahan dalam memproses data',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        }
+    });
+});
+
+// Load users data function (similar to login script)
+async function loadUsers() {
+    try {
+        const response = await fetch('default-users.json');
+        if (!response.ok) throw new Error('Failed to load users data');
+        return await response.json();
+    } catch (error) {
+        console.error('Error loading users:', error);
+        Swal.fire({
+            title: 'Error!',
+            text: 'Gagal memuat data users!',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+        return [];
+    }
+}
+
+// Check if user is logged in when page loads
+window.addEventListener('load', async () => {
+    const username = sessionStorage.getItem("username");
+    if (!username) {
+        // Redirect to login page if no session exists
+        window.location.href = "index.html";
+        return;
+    }
+
+    // Verify user exists in default-users.json
+    const users = await loadUsers();
+    const user = users.find(u => u.name === username);
+    if (!user) {
+        // Clear invalid session and redirect to login
+        sessionStorage.clear();
+        window.location.href = "index.html";
+        return;
+    }
+
+    // Update UI with user information
+    document.getElementById("user-name").textContent = username;
+});
+    </script>
+</body>
+</html>
