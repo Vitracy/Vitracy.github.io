@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload dan Edit JSON</title>
+    <link rel="stylesheet" href="styleedituser.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Upload dan Edit File JSON</h1>
+        <input type="file" id="fileInput" accept=".json">
+        <button id="loadButton">Load JSON</button>
+        
+        <div id="formContainer" class="hidden">
+            <h2>Edit Data</h2>
+            <input type="text" id="name" placeholder="Name">
+            <input type="text" id="rank" placeholder="Rank">
+            <input type="text" id="division" placeholder="Division">
+            <button id="addButton">Add</button>
+        </div>
+
+        <h2>Data JSON</h2>
+        <pre id="jsonOutput"></pre>
+        <button id="downloadButton" class="hidden">Download JSON</button>
+    </div>
+
+    <script src="scriptedituser.js"></script>
+</body>
+</html>
+
