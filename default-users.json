@@ -1,7 +1,5 @@
 [
   { "name": "Ardananta Dananjaya", "rank": "Jenderal Polisi", "division": "All" },
-  { "name": "Marcio Zelensky", "rank": "Komisaris Jenderal Polisi", "division": "Satuan Lalu Lintas" },
-  { "name": "Vincentzo Lacozta", "rank": "Komisaris Polisi", "division": "Satuan Lalu Lintas" },
   { "name": "Allya Rebelions", "rank": "Komisaris Polisi", "division": "Satuan Lalu Lintas" },
   { "name": "Oktoy Corneto", "rank": "Ajun Komisaris Polisi ", "division": "Satuan Lalu Lintas" },
   { "name": "Tengku Khasyim", "rank": "Ajun Komisaris Polisi", "division": "Samapta Bhayangkara & SDM & Polhut" },
@@ -10,16 +8,13 @@
   { "name": "Angga Victoria", "rank": "Brigadir Polisi Dua", "division": "Satlantas " },
   { "name": "Noval Demarco", "rank": "Ajun Brigadir Polisi", "division": "Satlantas" },
   { "name": "Marvel Yokohama", "rank": "Komisaris Jendral Polisi", "division": "Profesi dan Pengamanan" },
-  { "name": "Michael Algya", "rank": "Kompol", "division": "sabhara" },
-  { "name": "Zico Octavia", "rank": "Ajun Komisaris Polisi ", "division": "Satuan Lalu Lintas" },
+  { "name": "Zico Octavio", "rank": "Ajun Komisaris Polisi ", "division": "Satuan Lalu Lintas" },
   { "name": "Theo Graventaz", "rank": "Inspektur Polisi Dua", "division": "Samapta Bhayangkara" },
-  { "name": "Jona Bloodwyn", "rank": "Brigadir Polisi Dua", "division": "Satlantas" },
   { "name": "Suntoro Bagio", "rank": "Brigadir Polisi Dua", "division": "Samapta Bhayangkara" },
   { "name": "Bayy Asmara", "rank": "Brigadir Polisi Dua", "division": "Samapta Bhayangkara" },
   { "name": "Erlando Tyo", "rank": "Brigadir Polisi Dua", "division": "Samapta Bhayangkara" },
   { "name": "Banjiro Mizoguchi", "rank": "Brigadir Polisi Dua", "division": "Samapta Bhayangkara" },
   { "name": "Mark Vans", "rank": "Ajun Brigadir Polisi", "division": "Samapta Bhayangkara" },
   { "name": "Jater Bambang", "rank": "Brigadir Polisi Dua", "division": "Samapta Bhayangkara" },
-  { "name": "Bahar Kammarudin", "rank": "Ajun Brigadir Polisi", "division": "Satlantas" },
   { "name": "Beryan_Asmara", "rank": "Abrip", "division": "Santlans" }
 ]
