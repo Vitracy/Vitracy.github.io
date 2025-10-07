@@ -1,20 +1,3 @@
 [
-  { "name": "Ardananta Dananjaya", "rank": "Jenderal Polisi", "division": "All" },
-  { "name": "Allya Rebelions", "rank": "Komisaris Polisi", "division": "Satuan Lalu Lintas" },
-  { "name": "Oktoy Corneto", "rank": "Ajun Komisaris Polisi ", "division": "Satuan Lalu Lintas" },
-  { "name": "Tengku Khasyim", "rank": "Ajun Komisaris Polisi", "division": "SDM & Polhut & Sabhara" },
-  { "name": "Leon Alexon", "rank": "Inspektur Jendral Polisi", "division": "Profesi dan Pengamanan & Sabhara & SDM" },
-  { "name": "Yamagata Nakashima", "rank": "Ajun Brigadir Polisi", "division": "Satlantas" },
-  { "name": "Angga Victoria", "rank": "Brigadir Polisi Dua", "division": "Satlantas " },
-  { "name": "Noval Demarco", "rank": "Ajun Brigadir Polisi", "division": "Satlantas" },
-  { "name": "Marvel Yokohama", "rank": "Komisaris Jendral Polisi", "division": "Profesi dan Pengamanan & Satlantas & SDM" },
-  { "name": "Zico Octavio", "rank": "Ajun Komisaris Polisi ", "division": "Satuan Lalu Lintas" },
-  { "name": "Theo Graventaz", "rank": "Inspektur Polisi Dua", "division": "Samapta Bhayangkara" },
-  { "name": "Suntoro Bagio", "rank": "Brigadir Polisi Dua", "division": "Samapta Bhayangkara" },
-  { "name": "Bayy Asmara", "rank": "Brigadir Polisi Dua", "division": "Samapta Bhayangkara" },
-  { "name": "Erlando Tyo", "rank": "Brigadir Polisi Dua", "division": "Samapta Bhayangkara" },
-  { "name": "Banjiro Mizoguchi", "rank": "Brigadir Polisi", "division": "Satuan Lalu Lintas" },
-  { "name": "Mark Vans", "rank": "Ajun Brigadir Polisi", "division": "Samapta Bhayangkara" },
-  { "name": "Jater Bambang", "rank": "Brigadir Polisi Dua", "division": "Samapta Bhayangkara" },
-  { "name": "Beryan_Asmara", "rank": "Abrip", "division": "Santlans" }
+  { "name": "Banjiro Mizoguchi", "rank": "Brigadir Polisi", "division": "Satuan Lalu Lintas" }
 ]
